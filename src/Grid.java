@@ -10,7 +10,7 @@ public class Grid {
 	public Grid() {
 		initializeGrid();
 	}
-
+ 
 	private void defineTilePercentage() {
 		
 		Scanner scan = new Scanner(System.in); 
