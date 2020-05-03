@@ -1,4 +1,8 @@
 
-public class BlackTile {
-	
+public class BlackTile 
+{
+	public void doEffect(Car car)
+	{
+		car.setPosition(0);
+	}
 }
