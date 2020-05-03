@@ -38,7 +38,7 @@ public class Car
 	{
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Press 0 to start from the begging with a random amount of fuel (1-120)");
-		System.out.println("Press 1-6 to skip amount of rounds and gain 20fuel per round");
+		System.out.println("Press  1-6 to skip amount of rounds and gain 20fuel per round");
 		
 		return scan.nextByte();
 

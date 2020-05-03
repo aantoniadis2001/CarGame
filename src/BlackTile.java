@@ -6,3 +6,4 @@ public class BlackTile
 		car.setPosition(0);
 	}
 }
+  
