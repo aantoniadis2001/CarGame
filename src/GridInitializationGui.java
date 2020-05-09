@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 
 import com.sun.corba.se.spi.ior.MakeImmutable;
 
-public class GridInititalizationGui extends JFrame{
+public class GridInitializationGui extends JFrame{
 	
 	Container mainWindow = getContentPane();
 	
@@ -23,7 +23,7 @@ public class GridInititalizationGui extends JFrame{
 	JTextField greenText = new JTextField(3);
 	JTextField blackText = new JTextField(3);
 	
-	public GridInititalizationGui(String title) {
+	public GridInitializationGui(String title) {
 		super(title);
 		
 		//Setting window settings
