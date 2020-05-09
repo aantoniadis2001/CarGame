@@ -1,4 +1,5 @@
 
-public interface Tile {
-
+public interface Tile 
+{
+	public void doEffect();
 }
