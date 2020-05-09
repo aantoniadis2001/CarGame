@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Grid {
-	private ArrayList<Integer[]> grid = new ArrayList<Integer[]>();
+	private ArrayList<Integer> grid = new ArrayList<Integer>();
 	private int[] gridDimension = new int[2];
 	private int[] percentage = new int[3];
 	
@@ -11,6 +11,12 @@ public class Grid {
 		initializeGrid();
 	}
  
+	public int[] getDimensions() {
+		return gridDimension;
+	}
+	public int getCell(int i) {
+		return grid.get(i);
+	}
 	private void defineTilePercentage() {
 		
 		Scanner scan = new Scanner(System.in); 
@@ -44,27 +50,26 @@ public class Grid {
 	}
 	public void initializeGrid() {
 		int rng;
-		Integer[] choice = new Integer[2];
+		Integer choice;
 		Random rand = new Random();
 		
 		defineTilePercentage();
 		defineGridDimensions();
 		
 		for(int i = 0; i < (gridDimension[0] * gridDimension[1]); i++){
-			choice[0] = i;
 			
 			rng = rand.nextInt(101);
 			if(rng < percentage[0]) {
-				choice[1] = 0;
+				choice = 0;
 			}else if(rng < percentage[0] + percentage[1]) {
-				choice[1] = 1;
+				choice = 1;
 			}else {
-				choice[1] = 2;
+				choice = 2;
 			}
 			
 			grid.add(choice);
 			
-			System.out.println("Grid : " + choice[0] + " type : " + choice[1]);
+			//System.out.println("Grid : " + i + " type : " + choice);
 		}
 	}
 }
