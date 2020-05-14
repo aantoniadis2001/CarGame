@@ -16,63 +16,65 @@ public class MainFrame extends JFrame {
 	final static int X = 0;
 	final static int Y = 1;
 	
-	Container mainWindow = getContentPane();
+	private Container mainWindow = getContentPane();
 	
-	JPanel boardPanel;
-	JPanel infoPanel = new JPanel(new GridLayout(1,4));
+	private JPanel boardPanel;
+	private JPanel infoPanel = new JPanel(new GridLayout(1,4));
 	
-	JButton roll = new JButton("Roll dice");
+	private JButton roll = new JButton("Roll dice");
 	
-	JLabel fuelLabel1 = new JLabel("Player 1's fuel : ");
-	JLabel fuelLabel2 = new JLabel("Player 2's fuel : ");
-	JLabel fuelPlayer1 = new JLabel("120");
-	JLabel fuelPlayer2 = new JLabel("110");
-	
+	private JLabel fuelLabel1 = new JLabel("Player 1's fuel : ");
+	private JLabel fuelLabel2 = new JLabel("Player 2's fuel : ");
+	private JLabel fuelPlayer1 = new JLabel("120");
+	private JLabel fuelPlayer2 = new JLabel("110");
+	private JLabel [][]cell;
 	public MainFrame(String title, Grid grid) {
 		super(title);
 		
 		//get grid dimensions
 		final int []dimensions = grid.getDimensions();
 		final int size = dimensions[X] * dimensions[Y];
-		
+		 
 		//create grid
 		boardPanel = new JPanel(new GridLayout(dimensions[X], dimensions[Y]));
 		
 		//set window options
 		mainWindow.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500,500);
+		setSize(1000,1000);
 		
 		//create cells
-		JLabel []cell = new JLabel[size];
+		cell = new JLabel[dimensions[X]][dimensions[Y]];
 		
-		for(int i = 0; i < size; i++ ) {
+		for(int i = 0; i < dimensions[X]; i++ ) {
+			for(int j = 0; j < dimensions[Y]; j++) {
+				//label start and end
+				if(i == 0 && j == 0) {
+					cell[i][j] = new JLabel("Start");
+				}else if(i == (dimensions[X] - 1) && j == (dimensions[Y] - 1)) {
+					cell[i][j] = new JLabel("End");
+				}else {
+					cell[i][j] = new JLabel(" ");
+				}
+				//set cell properties
+				cell[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
+				cell[i][j].setOpaque(true);
+							
+				//fill grid in
+				switch(grid.getCell(i,j)) {
+					case 0:
+						cell[i][j].setBackground(Color.gray);
+						break;
+					case 1:
+						cell[i][j].setBackground(Color.green);
+						break;
+					case 2:
+						cell[i][j].setBackground(Color.black);
+						break;
+			}
+				boardPanel.add(cell[i][j]);
+			}
 			
-			//label start and end
-			if(i == 0) {
-				cell[i] = new JLabel("Start");
-			}else if(i == size - 1) {
-				cell[i] = new JLabel("End");
-			}else {
-				cell[i] = new JLabel(" ");
-			}
-			//set cell properties
-			cell[i].setBorder(BorderFactory.createLineBorder(Color.black));
-			cell[i].setOpaque(true);
-						
-			//fill grid in
-			switch(grid.getCell(i)) {
-				case 0:
-					cell[i].setBackground(Color.gray);
-					break;
-				case 1:
-					cell[i].setBackground(Color.green);
-					break;
-				case 2:
-					cell[i].setBackground(Color.black);
-					break;
-			}
-			boardPanel.add(cell[i]);
 		}
 		//add components
 		infoPanel.add(fuelLabel1);
