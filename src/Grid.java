@@ -20,11 +20,13 @@ public class Grid {
 		for(int i = 0; i < (gridDimension[0]); i++){
 			for(int j = 0; j < gridDimension[1]; j++) {
 				rng = rand.nextInt(101);
-				if(rng < percentage[0]) {
+				if(rng < percentage[0] || (i == 0 && j == 0) || (i == gridDimension[0] - 1 && j == gridDimension[1] - 1)) {
 					choice = 0;
-				}else if(rng < percentage[0] + percentage[1]) {
+				}
+				else if(rng < percentage[0] + percentage[1]) {
 					choice = 1;
-				}else {
+				}
+				else {
 					choice = 2;
 				}
 				

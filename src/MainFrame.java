@@ -16,30 +16,39 @@ public class MainFrame extends JFrame {
 	final static int X = 0;
 	final static int Y = 1;
 	
-	private Container mainWindow = getContentPane();
+	private JPanel mainWindow;
 	
 	private JPanel boardPanel;
-	private JPanel infoPanel = new JPanel(new GridLayout(1,4));
+	private JPanel infoPanel;
 	
 	private JButton roll = new JButton("Roll dice");
 	
-	private JLabel fuelLabel1 = new JLabel("Player 1's fuel : ");
-	private JLabel fuelLabel2 = new JLabel("Player 2's fuel : ");
-	private JLabel fuelPlayer1 = new JLabel("120");
-	private JLabel fuelPlayer2 = new JLabel("110");
+	private JLabel fuelLabel1; 
+	private JLabel fuelLabel2;
+	private JLabel fuelPlayer1;
+	private JLabel fuelPlayer2;
 	private JLabel [][]cell;
+	
 	public MainFrame(String title, Grid grid) {
 		super(title);
 		
+		mainWindow = (JPanel) this.getContentPane();
+		infoPanel = new JPanel();
+		infoPanel.setLayout(new GridLayout(1, 4));
+		
+		fuelLabel1 = new JLabel("Player 1's fuel : ");
+		fuelLabel2 = new JLabel("Player 2's fuel : ");
+		fuelPlayer1 = new JLabel("120");
+		fuelPlayer2 = new JLabel("110");
+		
 		//get grid dimensions
-		final int []dimensions = grid.getDimensions();
+		final int[] dimensions = grid.getDimensions();
 		final int size = dimensions[X] * dimensions[Y];
 		 
 		//create grid
 		boardPanel = new JPanel(new GridLayout(dimensions[X], dimensions[Y]));
 		
 		//set window options
-		mainWindow.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000,1000);
 		
