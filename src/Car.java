@@ -2,24 +2,37 @@ import java.util.Scanner;
 public class Car 
 {
 	private double fuel;
-	private int position;
+	private int[] position = new int[2];
 	
 	public double getFuel()
 	{
 		return fuel;
 	}
-	public int getPosition()
+	public int[] getPosition()
 	{
 		return position;
+	}
+	public int getPosition(int x)
+	{
+		return position[x];
 	}
 	
 	public void setFuel(double fuel)
 	{
 		this.fuel = fuel;
 	}
-	public void setPosition(int position)
+	public void setPosition(int x, int y)
 	{
-		this.position = position;
+		position[0] = x;
+		position[1] = y;
+	}
+	public void setPositionX(int x)
+	{
+		position[0] = x;
+	}
+	public void setPositionY(int y)
+	{
+		position[1] = y;
 	}
 	
 	public byte outOfFuel()
@@ -29,7 +42,7 @@ public class Car
 		
 		if (choice == 0)
 		{
-			position = 0;
+			setPosition(0,0);
 		}
 		return choice;
 		

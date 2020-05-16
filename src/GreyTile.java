@@ -1,9 +1,14 @@
 import java.util.Random;
 public class GreyTile 
 {	
+	private int fuelCost;
 	public void doEffect(Car car)
 	{
-		car.setFuel(car.getFuel() - generateFuelCost());
+		fuelCost = generateFuelCost();
+		if(car.getFuel() - fuelCost > 0)
+			car.setFuel(car.getFuel() - fuelCost);
+		else
+			car.setFuel(0);
 	}
 	private int generateFuelCost()
 	{
