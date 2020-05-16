@@ -19,22 +19,22 @@ public class GridInitializationGui extends JFrame{
 	private static final int X = 0;
 	private static final int Y = 1;
 	
-	private Container mainWindow = getContentPane();
-	private JPanel mainPanel = new JPanel();
+	private JPanel mainWindow;
+	private JPanel mainPanel;
 	
-	private JLabel xLabel = new JLabel("Game board width (X = 2+) : ");
-	private JLabel yLabel = new JLabel("Game board height (Y = 2+) : ");
-	private JLabel grayLabel = new JLabel("Percentage of gray cells (0 - 100) : ");
-	private JLabel greenLabel = new JLabel("Percentage of green cells (0 - 100) : ");
-	private JLabel blackLabel = new JLabel("Percentage of black cells (0 - 100) : ");
+	private JLabel xLabel;
+	private JLabel yLabel;
+	private JLabel grayLabel;
+	private JLabel greenLabel;
+	private JLabel blackLabel;
 	
-	private JTextField xText = new JTextField(10);
-	private JTextField yText = new JTextField(10);
-	private JTextField grayText = new JTextField(3);
-	private JTextField greenText = new JTextField(3);
-	private JTextField blackText = new JTextField(3);
+	private JTextField xText;
+	private JTextField yText;
+	private JTextField grayText;
+	private JTextField greenText;
+	private JTextField blackText;
 	
-	private JButton add = new JButton("OK");
+	private JButton okButton;
 	
 	private int[] dim = new int[2];
 	private int[] perc = new int[3];
@@ -42,13 +42,28 @@ public class GridInitializationGui extends JFrame{
 	public GridInitializationGui(String title) {
 		super(title);
 		
+		mainWindow = (JPanel) this.getContentPane();
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new GridLayout(5, 2));
+		
+		xLabel = new JLabel("Game board width (X = 2+) : ");
+		yLabel = new JLabel("Game board height (Y = 2+) : ");
+		grayLabel = new JLabel("Percentage of gray cells (0 - 100) : ");
+		greenLabel = new JLabel("Percentage of green cells (0 - 100) : ");
+		blackLabel = new JLabel("Percentage of black cells (0 - 100) : ");
+		
+		xText = new JTextField(10);
+		yText = new JTextField(10);
+		grayText = new JTextField(3);
+		greenText = new JTextField(3);
+		blackText = new JTextField(3);
+		
+		okButton = new JButton("OK");
+		
 		//Setting window settings
-		mainWindow.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(450,140);
 		setResizable(false);
-		
-		mainPanel.setLayout(new GridLayout(5,2));
 	
 		//Adding Swing components to window
 		mainPanel.add(xLabel);
@@ -67,9 +82,9 @@ public class GridInitializationGui extends JFrame{
 		mainPanel.add(blackText);
 		
 		mainWindow.add(mainPanel,BorderLayout.CENTER);
-		mainWindow.add(add, BorderLayout.SOUTH);
+		mainWindow.add(okButton, BorderLayout.SOUTH);
 		
-		add.addActionListener(new ActionListener() {
+		okButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -16,17 +16,23 @@ public class NoFuelGui extends JFrame{
 	private Container mainWindow = getContentPane();
 	private JPanel buttonWindow = new JPanel(new GridLayout(1,2));
 	
-	private JLabel label = new JLabel("Rounds to wait (0 returns you to start) : ");
-	private JTextField numberText = new JTextField();
-	private JButton ok = new JButton("OK");
+	private JLabel label;
+	private JTextField numberText;
+	private JButton ok;
 	
 	private int rounds;
 	
 	public NoFuelGui(String title) {
 		super(title);
 		
+		mainWindow = (JPanel) this.getContentPane();
+		buttonWindow = new JPanel();
+		buttonWindow.setLayout(new GridLayout(1, 4));
 		
-		mainWindow.setLayout(new BorderLayout());
+		label = new JLabel("Rounds to wait (0 returns you to start) : ");
+		numberText = new JTextField();
+		ok = new JButton("OK");
+		
 		setSize(500,90);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +59,8 @@ public class NoFuelGui extends JFrame{
 		if(rounds < 0 || rounds > 6) {
 			JOptionPane.showMessageDialog(null, "Invalid parameters, please try again");
 			numberText.setText("");
-		}else {
+		}
+		else {
 			setVisible(false);
 		}
 		

@@ -60,9 +60,11 @@ public class MainFrame extends JFrame {
 				//label start and end
 				if(i == 0 && j == 0) {
 					cell[i][j] = new JLabel("Start");
-				}else if(i == (dimensions[X] - 1) && j == (dimensions[Y] - 1)) {
+				}
+				else if(i == (dimensions[X] - 1) && j == (dimensions[Y] - 1)) {
 					cell[i][j] = new JLabel("End");
-				}else {
+				}
+				else {
 					cell[i][j] = new JLabel(" ");
 				}
 				//set cell properties
