@@ -38,9 +38,11 @@ public class GridInitializationGui extends JFrame{
 	public GridInitializationGui(String title) {
 		super(title);
 		
+		//Create swing components
 		mainWindow = (JPanel) this.getContentPane();
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(5, 2));
+		
 		
 		xLabel = new JLabel("Game board width (X = 2+) : ");
 		yLabel = new JLabel("Game board height (Y = 2+) : ");
@@ -80,6 +82,7 @@ public class GridInitializationGui extends JFrame{
 		mainWindow.add(mainPanel,BorderLayout.CENTER);
 		mainWindow.add(okButton, BorderLayout.SOUTH);
 		
+
 		okButton.addActionListener(new ActionListener() {
 			
 			@Override
