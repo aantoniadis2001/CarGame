@@ -1,19 +1,18 @@
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JOptionPane;
+
 public class CarGame
 {	
 	private static Car[] car;
-	private static int diceRoll;
-	private static int[] pOutOfFuelTurns = {0,0};
-	private static int choice;
-	private static int[] maxDim;
-	private static int borderCounter;
-	private static int cellType;
 	private static GreyTile grey = new GreyTile();
 	private static GreenTile green = new GreenTile();
 	private static BlackTile black = new BlackTile();
 	private static Grid grid;
 	private static NoFuelGui nfg;
+	private static int[] pOutOfFuelTurns = {0,0};
+	private static int[] maxDim;
+	private static int diceRoll;
 	
 	public static void main(String[] args) 
 	{	
@@ -61,11 +60,23 @@ public class CarGame
 			}
 			turnCounter++;
 		}
+		
+		if(car[0].getPosition() != maxDim)
+		{
+			JOptionPane.showMessageDialog(null, "Congratulations player 1, YOU WON");
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Congratulations player 2, YOU WON");
+		}
 	}
 	
 	public static void turns(int p)
 	{
-		cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
+		int choice;
+		int cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
+		int borderCounter;
+		diceRoll = 0;
 		
 		if(car[p].getFuel() == 0)
 		{
