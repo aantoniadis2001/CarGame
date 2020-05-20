@@ -17,7 +17,7 @@ public class CarGame
 	 
 	public static void main(String[] args) 
 	{	
-		int turnCounter = 1;
+		int turnCounter = 0;
 		
 		car = new Car[2];
 		car[0] = new Car();
@@ -51,14 +51,7 @@ public class CarGame
 		
 		while((car[0].getPosition() != maxDim) && (car[1].getPosition() != maxDim))
 		{
-			if(turnCounter % 2 != 0)
-			{
-				turns(0);
-			}
-			else
-			{
-				turns(1);
-			}
+			turns(turnCounter % 2);
 			turnCounter++;
 		}
 		
@@ -132,7 +125,7 @@ public class CarGame
 							car[p].setPositionY(car[p].getPosition(1) + 1);
 					}
 				}
-				frame.updateCarPosition(p, car[p].getPosition());
+				//frame.updateCarPosition(p, car[p].getPosition());
 			}
 			
 			cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));

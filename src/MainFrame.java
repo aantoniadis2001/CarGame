@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
 	private JPanel infoPanel;
 	
 	private JLabel die;
-	private JLabel fuelLabel1; 
+	private JLabel fuelLabel1;  
 	private JLabel fuelLabel2;
 	private JLabel []fuel = new JLabel[2];
 	private JLabel [][]cell;
@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
 		fuel[0] = new JLabel("120");
 		fuel[1] = new JLabel("120");
 		
-		die = new JLabel("Hit roll to start the game");
+		die = new JLabel("");
 		//get grid dimensions
 		final int[] dimensions = grid.getDimensions();
 		 
