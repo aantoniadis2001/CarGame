@@ -1,15 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.sun.javafx.geom.transform.BaseTransform.Degree;
 
 public class MainFrame extends JFrame {
 	
@@ -122,34 +119,42 @@ public class MainFrame extends JFrame {
 		this.fuel[player].setText(Integer.toString(fuel));
 	}
 	public void updateCarPosition(int player, int []destination) {
-		int rotation = 0, temp;
-		RotatedIcon car;
+		int rotation = 0;
+		RotatedIcon car, removedCar = null;
 		
-		if((destination[X] % 2) != 0) {
-			rotation = 180;	
-			temp = Math.abs((cell[0].length - 1) - destination[0]);	
-		}else {
-			temp = destination[0];
+		if(carPosition[(player)][0] == carPosition[(player == 0 ? 1 : 0)][0] && carPosition[(player)][1] == carPosition[(player == 0 ? 1 : 0)][1]) {
+			if(player == 0) {
+				if(carPosition[player][X] % 2 != 0) {
+					removedCar = new RotatedIcon(redCar, 180);
+				}else {
+					removedCar = new RotatedIcon(redCar, 0);
+				}
+			}else {
+				if(carPosition[player][X] % 2 != 1) {
+					removedCar = new RotatedIcon(blueCar, 180);
+				}else {
+					removedCar = new RotatedIcon(blueCar, 0);
+				}
+			}
 		}
 		
-//		System.out.println("car pos " +carPosition[(player == 0 ? 1 : 0)][0] + " " + carPosition[(player)][1] + " " + player);
-//		System.out.println("Destination " + destination[0] + " " + destination[1] + " " + (player == 0 ? 1 : 0) + "\n");
-			
+		cell[carPosition[player][1]][carPosition[player][0]].setIcon(removedCar);
+		
+		if((destination[X] % 2) != 0)
+			rotation = 180;	
+					
+		carPosition[player][0] = destination[0];
+		carPosition[player][1] = destination[1];
+		
 		if(destination[0] == carPosition[(player == 0 ? 1 : 0)][0] && destination[1] == carPosition[(player == 0 ? 1 : 0)][1]) {
 			car = new RotatedIcon(bothCars, rotation);
-//			System.out.println("VICTORY");
-		}
-		if(player == 0){
+		}else if(player == 0){
 			car = new RotatedIcon(blueCar, rotation);
 		}else {
 			car = new RotatedIcon(redCar, rotation);
 		}
 		
-		cell[carPosition[player][1]][carPosition[player][0]].setIcon(null);
-		cell[destination[1]][temp].setIcon(car);
 		
-		
-		carPosition[player][0] = temp;
-		carPosition[player][1] = destination[1];
+		cell[destination[1]][destination[0]].setIcon(car);
 	}
 }
