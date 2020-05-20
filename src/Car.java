@@ -12,9 +12,9 @@ public class Car
 	{
 		return position;
 	}
-	public int getPosition(int x)
+	public int getPosition(int d)
 	{
-		return position[x];
+		return position[d];
 	}
 	
 	public void setFuel(double fuel)

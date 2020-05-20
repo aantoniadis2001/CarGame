@@ -115,8 +115,8 @@ public class MainFrame extends JFrame {
 	public void updateDieLabel(int roll) {
 		die.setText("A " + Integer.toString(roll) + " has been rolled");
 	} 
-	public void updateFuelLabel(int player, int fuel) {
-		this.fuel[player].setText(Integer.toString(fuel));
+	public void updateFuelLabel(int player, double fuel) {
+		this.fuel[player].setText(Double.toString(fuel));
 	}
 	public void updateCarPosition(int player, int []destination) {
 		int rotation = 0;

@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 public class CarGame
 {	
 	private static Car[] car;
+	private static MainFrame frame;
 	private static GreyTile grey = new GreyTile();
 	private static GreenTile green = new GreenTile();
 	private static BlackTile black = new BlackTile();
@@ -13,7 +14,7 @@ public class CarGame
 	private static int[] pOutOfFuelTurns = {0,0};
 	private static int[] maxDim;
 	private static int diceRoll;
-	
+	 
 	public static void main(String[] args) 
 	{	
 		int turnCounter = 1;
@@ -38,15 +39,15 @@ public class CarGame
 		}
 		
 		grid = new Grid(gig.getDim(), gig.getPerc());				
-		MainFrame frame = new MainFrame("Car Game", grid);
+		frame = new MainFrame("Car Game", grid);
 		frame.setVisible(true);
 		
 		nfg = new NoFuelGui("You are out of fuel!");
 		nfg.setVisible(false);
 		
 		maxDim = grid.getDimensions();
-		maxDim[0]++;
-		maxDim[1]++;
+		maxDim[0]--;
+
 		
 		while((car[0].getPosition() != maxDim) && (car[1].getPosition() != maxDim))
 		{
@@ -61,7 +62,7 @@ public class CarGame
 			turnCounter++;
 		}
 		
-		if(car[0].getPosition() != maxDim)
+		if(car[0].getPosition() == maxDim)
 		{
 			JOptionPane.showMessageDialog(null, "Congratulations player 1, YOU WON");
 		}
@@ -75,7 +76,6 @@ public class CarGame
 	{
 		int choice;
 		int cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
-		int borderCounter;
 		diceRoll = 0;
 		
 		if(car[p].getFuel() == 0)
@@ -101,8 +101,9 @@ public class CarGame
 			else
 			{
 				pOutOfFuelTurns[p] = choice;
-				car[p].setFuel(choice * 20);
+				car[p].setFuel(choice * 20);	
 			}
+			frame.updateFuelLabel(p, car[p].getFuel());
 		}
 		else
 		{
@@ -114,17 +115,26 @@ public class CarGame
 			else
 			{
 				rollDice();
-				borderCounter = maxDim[0] - (car[p].getPosition(0) + diceRoll);
-				if(borderCounter >= 0 )
+				for (int i = 0; i < diceRoll; i++)
 				{
-					car[p].setPositionX(car[p].getPosition(0) + diceRoll);
+					if (car[p].getPosition(1) % 2 == 0)
+					{
+						if(car[p].getPosition(0) < maxDim[0])
+							car[p].setPositionX(car[p].getPosition(0) + 1);
+						else
+							car[p].setPositionY(car[p].getPosition(1) + 1);
+					}
+					else
+					{
+						if(car[p].getPosition(0) < maxDim[0])
+							car[p].setPositionX(car[p].getPosition(0) -1);
+						else
+							car[p].setPositionY(car[p].getPosition(1) + 1);
+					}
 				}
-				else
-				{
-					car[p].setPosition(maxDim[0] + borderCounter, car[p].getPosition(1) + 1);
-					
-				}
+				frame.updateCarPosition(p, car[p].getPosition());
 			}
+			
 			cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
 			switch (cellType)
 			{
