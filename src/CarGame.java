@@ -137,9 +137,11 @@ public class CarGame
 			{
 				case 0:
 					grey.doEffect(car[p]);
+					frame.updateFuelLabel(p, car[p].getFuel());
 					break;
 				case 1:
 					green.doEffect(car[p]);
+					frame.updateFuelLabel(p, car[p].getFuel());
 					break;
 				case 2:
 					black.doEffect(car[p]);
