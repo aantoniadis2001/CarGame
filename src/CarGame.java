@@ -23,7 +23,7 @@ public class CarGame
 		car[0] = new Car();
 		car[1] = new Car();
 		
-		GridInitializationGui gig = new GridInitializationGui("Set game parameters");
+		GridInitializationGui gig = new GridInitializationGui();
 		gig.setVisible(true);
 		 
 		while(gig.isVisible()) 
@@ -39,19 +39,23 @@ public class CarGame
 		}
 		
 		grid = new Grid(gig.getDim(), gig.getPerc());				
-		frame = new MainFrame("Car Game", grid);
+		frame = new MainFrame(grid);
 		frame.setVisible(true);
 		
-		nfg = new NoFuelGui("You are out of fuel!");
+		nfg = new NoFuelGui();
 		nfg.setVisible(false);
 		
-		maxDim = grid.getDimensions();
+		maxDim = grid.getDimension();
 		maxDim[0]--;
+		maxDim[1]--;
 
-		
 		while((car[0].getPosition() != maxDim) && (car[1].getPosition() != maxDim))
 		{
-			turns(turnCounter % 2);
+			if(turnCounter % 2 == 0)
+				turns(1);
+			else
+				turns(2);
+			
 			turnCounter++;
 		}
 		
@@ -125,7 +129,7 @@ public class CarGame
 							car[p].setPositionY(car[p].getPosition(1) + 1);
 					}
 				}
-				//frame.updateCarPosition(p, car[p].getPosition());
+				frame.updateCarPosition(p, car[p].getPosition());
 			}
 			
 			cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));

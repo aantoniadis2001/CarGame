@@ -10,12 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GridInitializationGui extends JFrame{
-	
-	private static final int X = 0;
-	private static final int Y = 1;
-	
-	private JPanel mainWindow;
+public class GridInitializationGui extends JFrame
+{
+	private JPanel contentPanel;
 	private JPanel mainPanel;
 	
 	private JLabel xLabel;
@@ -35,14 +32,13 @@ public class GridInitializationGui extends JFrame{
 	private int[] dim = new int[2];
 	private int[] perc = new int[3];
 	
-	public GridInitializationGui(String title) {
-		super(title);
+	public GridInitializationGui()
+	{
+		this.setTitle("Provide the values you want");
 		
-		//Create swing components
-		mainWindow = (JPanel) this.getContentPane();
+		contentPanel = (JPanel) this.getContentPane();
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(5, 2));
-		
 		
 		xLabel = new JLabel("Game board width (X = 2+) : ");
 		yLabel = new JLabel("Game board height (Y = 2+) : ");
@@ -59,44 +55,44 @@ public class GridInitializationGui extends JFrame{
 		okButton = new JButton("OK");
 		
 		//Setting window settings
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(450,140);
 		setResizable(false);
-	
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		//Adding Swing components to window
 		mainPanel.add(xLabel);
 		mainPanel.add(xText);
 		
 		mainPanel.add(yLabel);
 		mainPanel.add(yText);
-		
+				
 		mainPanel.add(grayLabel);
 		mainPanel.add(grayText);
-		
+				
 		mainPanel.add(greenLabel);
 		mainPanel.add(greenText);
-		
+				
 		mainPanel.add(blackLabel);
 		mainPanel.add(blackText);
 		
-		mainWindow.add(mainPanel,BorderLayout.CENTER);
-		mainWindow.add(okButton, BorderLayout.SOUTH);
-		
+		contentPanel.add(mainPanel,BorderLayout.CENTER);
+		contentPanel.add(okButton, BorderLayout.SOUTH);
+				
 
-		okButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		okButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				okButtonAction();				
 			}
 		});
-		
 	}
 	
-	private void okButtonAction() {
+	private void okButtonAction() 
+	{
 		
-		dim[X] = Integer.parseInt(xText.getText());
-		dim[Y] = Integer.parseInt(yText.getText());
+		dim[0] = Integer.parseInt(xText.getText());
+		dim[1] = Integer.parseInt(yText.getText());
 		perc[0] = Integer.parseInt(grayText.getText());
 		perc[1] = Integer.parseInt(greenText.getText());
 		perc[2] = Integer.parseInt(blackText.getText());
@@ -113,16 +109,19 @@ public class GridInitializationGui extends JFrame{
 			blackText.setText("");
 		}
 	}
-	private boolean isValidData(int dim[], int perc[]) {
-		return (dim[X] > 1 &&  dim[Y] > 1) && ((perc[0] + perc[1] + perc[2]) == 100) ? true : false;
+	
+	private boolean isValidData(int dim[], int perc[]) 
+	{
+		return (dim[0] > 1 &&  dim[1] > 1) && ((perc[0] + perc[1] + perc[2]) == 100) ? true : false;
 	}
-	public int[] getDim() {
+	
+	public int[] getDim() 
+	{
 		return dim;
 	}
 	
-	public int[] getPerc() {
+	public int[] getPerc() 
+	{
 		return perc;
 	}
- 
-  
 }

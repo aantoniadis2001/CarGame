@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,62 +10,64 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class NoFuelGui extends JFrame{
-	
-	private Container mainWindow = getContentPane();
-	private JPanel buttonWindow = new JPanel(new GridLayout(1,2));
+public class NoFuelGui extends JFrame
+{
+	private JPanel contentPanel;
+	private JPanel mainPanel;
 	
 	private JLabel label;
 	private JTextField numberText;
-	private JButton ok;
+	private JButton okButton;
 	
 	private int rounds;
 	
-	public NoFuelGui(String title) {
-		super(title);
+	public NoFuelGui()
+	{
+		this.setTitle("Your are out of Fuel!");
 		
-		mainWindow = (JPanel) this.getContentPane();
-		buttonWindow = new JPanel();
-		buttonWindow.setLayout(new GridLayout(1, 4));
+		contentPanel = (JPanel) this.getContentPane();
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new GridLayout(1, 2));
 		
 		label = new JLabel("Rounds to wait (0 returns you to start) : ");
-		numberText = new JTextField();
-		ok = new JButton("OK");
+		numberText = new JTextField(3);
+		okButton = new JButton("OK");
 		
 		setSize(500,90);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		buttonWindow.add(label);
-		buttonWindow.add(numberText);
+		mainPanel.add(label);
+		mainPanel.add(numberText);
 		
-		mainWindow.add(buttonWindow, BorderLayout.CENTER);
-		mainWindow.add(ok, BorderLayout.SOUTH);
+		contentPanel.add(mainPanel, BorderLayout.CENTER);
+		contentPanel.add(okButton, BorderLayout.SOUTH);
 		
-		ok.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				okAction();
-				
+		okButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				okAction();	
 			}
 		});
 	}
 	
-	private void okAction() {
-		rounds = Integer.parseInt(numberText.getText());
-		
-		if(rounds < 0 || rounds > 6) {
+	private void okAction() 
+	{	
+		if(rounds < 0 || rounds > 6) 
+		{
 			JOptionPane.showMessageDialog(null, "Invalid parameters, please try again");
 			numberText.setText("");
 		}
-		else {
+		else 
+		{
 			setVisible(false);
 		}
-		
+		rounds = Integer.parseInt(numberText.getText());	
 	}
 	
-	public int getRounds() {
+	public int getRounds() 
+	{
 		return rounds;
 	}
 }

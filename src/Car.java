@@ -4,6 +4,13 @@ public class Car
 	private double fuel;
 	private int[] position = new int[2];
 	
+	public Car()
+	{
+		fuel = 120;
+		position[0] = 0;
+		position[1] = 0;
+	}
+	
 	public double getFuel()
 	{
 		return fuel;
@@ -35,25 +42,25 @@ public class Car
 		position[1] = y;
 	}
 	
-	public byte outOfFuel()
-	{
-		byte choice;
-		choice = choice();
-		
-		if (choice == 0)
-		{
-			setPosition(0,0);
-		}
-		return choice;
-		
-	}
-	public byte choice()
-	{
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Press 0 to start from the begging with a random amount of fuel (1-120)");
-		System.out.println("Press  1-6 to skip amount of rounds and gain 20fuel per round");
-		
-		return scan.nextByte();
-
-	}
+//	public byte outOfFuel()
+//	{
+//		byte choice;
+//		choice = choice();
+//		
+//		if (choice == 0)
+//		{
+//			setPosition(0,0);
+//		}
+//		return choice;
+//		
+//	}
+//	public byte choice()
+//	{
+//		Scanner scan = new Scanner(System.in);
+//		System.out.println("Press 0 to start from the begging with a random amount of fuel (1-120)");
+//		System.out.println("Press  1-6 to skip amount of rounds and gain 20fuel per round");
+//		
+//		return scan.nextByte();
+//
+//	}
 }

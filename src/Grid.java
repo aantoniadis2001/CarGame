@@ -1,46 +1,51 @@
 import java.util.Random;
 
-public class Grid {
-	final static int X = 1;
-	final static int Y = 0;
-	
+public class Grid 
+{
 	private int[][] grid;
-	private int[] gridDimension = new int[2];
+	private int[] maxDim = new int[2];
 	private int[] percentage = new int[3];
-	
-	public Grid(int[] dim, int[] perc) {
+
+	public Grid(int[] dim, int[] perc)
+	{
 		int rng;
 		int choice;
 		Random rand = new Random();
-		gridDimension = dim;
+		maxDim = dim;
 		percentage = perc;
 		
-		grid = new int[gridDimension[X]][gridDimension[Y]];
+		grid = new int[maxDim[0]][maxDim[1]];
 		
-		for(int i = 0; i < (gridDimension[X]); i++){
-			for(int j = 0; j < gridDimension[Y]; j++) {
+		for(int i = 0; i < (maxDim[0]); i++)
+		{
+			for(int j = 0; j < maxDim[1]; j++) 
+			{
 				rng = rand.nextInt(101);
-				if(rng < percentage[0] || (i == 0 && j == 0) || (i == gridDimension[0] - 1 && j == gridDimension[1] - 1)) {
+				if(rng < percentage[0] || (i == 0 && j == 0) || (i == maxDim[0] - 1 && j == maxDim[1] - 1)) 
+				{
 					choice = 0;
 				} 
-				else if(rng < percentage[0] + percentage[1]) {
+				else if(rng < percentage[0] + percentage[1]) 
+				{
 					choice = 1;
 				}
-				else {
+				else 
+				{
 					choice = 2;
 				}
 				
 				grid[i][j]  = choice;
-			}	
-			
+			}
 		}
 	}
- 
-	public int[] getDimensions() {
-		return gridDimension;
+	
+	//Getters
+	public int[] getDimension()
+	{
+		return maxDim;
 	}
-	public int getCell(int x, int y) {
+	public int getCell(int x, int y) 
+	{
 		return grid[x][y];
 	}
-
 }

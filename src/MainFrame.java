@@ -4,22 +4,20 @@ import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
 	
-	final static int X = 1;
-	final static int Y = 0;
-	
-	private JPanel mainWindow;
-	
+	private JPanel contentPanel;
 	private JPanel rollPanel;
 	private JPanel boardPanel;
-	private JPanel infoPanel;
+	private JPanel statsPanel;
 	
 	private JLabel die;
+	private JButton rollDie;
 	private JLabel fuelLabel1;  
 	private JLabel fuelLabel2;
 	private JLabel []fuel = new JLabel[2];
@@ -31,44 +29,42 @@ public class MainFrame extends JFrame {
 	
 	private int[][] carPosition = new int[2][2];
 	
-	public MainFrame(String title, Grid grid) {
-		super(title);
-		
+	public MainFrame(Grid grid) 
+	{
+		this.setTitle("Car Game");
+		int[] dimensions = grid.getDimension();
 		//Create swing components
-		mainWindow = (JPanel) this.getContentPane();
-		
+		contentPanel = (JPanel) this.getContentPane();
+		statsPanel = new JPanel();
+		boardPanel = new JPanel();
 		rollPanel = new JPanel();
-		infoPanel = new JPanel();
 		
+		boardPanel.setLayout(new GridLayout(dimensions[0], dimensions[1]));
+		statsPanel.setLayout(new GridLayout(1, 4));
 		rollPanel.setLayout(new GridLayout(2,1));
-		infoPanel.setLayout(new GridLayout(1, 4));
 		
 		fuelLabel1 = new JLabel("Player 1's fuel : ");
 		fuelLabel2 = new JLabel("Player 2's fuel : ");
 		fuel[0] = new JLabel("120");
 		fuel[1] = new JLabel("120");
 		
+		rollDie = new JButton("Roll Die");
 		die = new JLabel("");
-		//get grid dimensions
-		final int[] dimensions = grid.getDimensions();
-		 
-		//create grid
-		boardPanel = new JPanel(new GridLayout(dimensions[X], dimensions[Y]));
-		
+		 		
 		//set window options
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 500);
 		
 		//create cells
-		cell = new JLabel[dimensions[X]][dimensions[Y]];
+		cell = new JLabel[dimensions[0]][dimensions[1]];
 		
-		for(int i = 0; i < dimensions[X]; i++ ) {
-			for(int j = 0; j < dimensions[Y]; j++) {
+		for(int i = 0; i < dimensions[0]; i++ ) {
+			for(int j = 0; j < dimensions[1]; j++) {
 				//label start and end
 				if(i == 0 && j == 0) {
 					cell[i][j] = new JLabel("Start");
 				}
-				else if(i == (dimensions[X] - 1) && j == (dimensions[Y] - 1)) {
+				else if(i == (dimensions[0] - 1) && j == (dimensions[1] - 1)) {
 					if(i % 2 == 1) {
 						cell[i][0].setText("End");
 						cell[i][j] = new JLabel();
@@ -102,14 +98,17 @@ public class MainFrame extends JFrame {
 			
 		}
 		//add components
-		infoPanel.add(fuelLabel1);
-		infoPanel.add(fuel[0]);
-		infoPanel.add(fuelLabel2);
-		infoPanel.add(fuel[1]);
+		statsPanel.add(fuelLabel1);
+		statsPanel.add(fuel[0]);
+		statsPanel.add(fuelLabel2);
+		statsPanel.add(fuel[1]);
 		
-		mainWindow.add(die, BorderLayout.NORTH);
-		mainWindow.add(boardPanel, BorderLayout.CENTER);
-		mainWindow.add(infoPanel, BorderLayout.SOUTH);
+		rollPanel.add(rollDie);
+		rollPanel.add(die);
+		
+		contentPanel.add(rollPanel, BorderLayout.NORTH);
+		contentPanel.add(boardPanel, BorderLayout.CENTER);
+		contentPanel.add(statsPanel, BorderLayout.SOUTH);
 	}
 	
 	public void updateDieLabel(int roll) {
@@ -124,13 +123,13 @@ public class MainFrame extends JFrame {
 		
 		if(carPosition[(player)][0] == carPosition[(player == 0 ? 1 : 0)][0] && carPosition[(player)][1] == carPosition[(player == 0 ? 1 : 0)][1]) {
 			if(player == 0) {
-				if(carPosition[player][X] % 2 != 0) {
+				if(carPosition[player][0] % 2 != 0) {
 					removedCar = new RotatedIcon(redCar, 180);
 				}else {
 					removedCar = new RotatedIcon(redCar, 0);
 				}
 			}else {
-				if(carPosition[player][X] % 2 != 1) {
+				if(carPosition[player][0] % 2 != 1) {
 					removedCar = new RotatedIcon(blueCar, 180);
 				}else {
 					removedCar = new RotatedIcon(blueCar, 0);
@@ -140,7 +139,7 @@ public class MainFrame extends JFrame {
 		
 		cell[carPosition[player][1]][carPosition[player][0]].setIcon(removedCar);
 		
-		if((destination[X] % 2) != 0)
+		if((destination[0] % 2) != 0)
 			rotation = 180;	
 					
 		carPosition[player][0] = destination[0];
