@@ -32,6 +32,7 @@ public class MainFrame extends JFrame {
 	
 	private int[][] carPosition = new int[2][2];
 	private int result;
+	private boolean clicked = false;
 	
 	public MainFrame(Grid grid) 
 	{
@@ -123,11 +124,12 @@ public class MainFrame extends JFrame {
 				Random rand = new Random();
 				result = rand.nextInt(6) + 1;	
 				updateDieLabel(result);
+				clicked = true;
 			}
 		});
 	}
 	
-	public void updateDieLabel(int roll) {
+	private void updateDieLabel(int roll) {
 		die.setText("A " + Integer.toString(roll) + " has been rolled");
 	} 
 	public void updateFuelLabel(int player, double fuel) {
@@ -181,5 +183,13 @@ public class MainFrame extends JFrame {
 	public int getResult() 
 	{
 		return result;
+	}
+	public boolean beenClicked() 
+	{
+		return clicked;
+	}
+	public void setClickedFalse() 
+	{
+		clicked = false;
 	}
 }

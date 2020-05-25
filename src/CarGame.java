@@ -13,7 +13,7 @@ public class CarGame
 	private static NoFuelGui nfg;
 	private static int[] pOutOfFuelTurns = {0,0};
 	private static int[] maxDim;
-	private static int diceRoll;
+	private static int[] end = new int[2];
 	 
 	public static void main(String[] args) 
 	{	
@@ -48,18 +48,18 @@ public class CarGame
 		maxDim = grid.getDimension();
 		maxDim[0]--;
 		maxDim[1]--;
-
-		while((car[0].getPosition() != maxDim) && (car[1].getPosition() != maxDim))
+																															
+		while((car[0].getPosition() != end) && (car[1].getPosition() != end))
 		{
 			if(turnCounter % 2 == 0)
-				turns(1);
+				turns(0);
 			else
-				turns(2);
+				turns(1);
 			
 			turnCounter++;
 		}
 		
-		if(car[0].getPosition() == maxDim)
+		if(car[0].getPosition() == end)
 		{
 			JOptionPane.showMessageDialog(null, "Congratulations player 1, YOU WON");
 		}
@@ -71,6 +71,7 @@ public class CarGame
 	
 	public static void turns(int p)
 	{
+		int diceRoll;
 		int choice;
 		int cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
 		
@@ -110,7 +111,20 @@ public class CarGame
 			}
 			else
 			{
+				while(!frame.beenClicked())
+				{
+					try 
+					{
+		                TimeUnit.SECONDS.sleep(1);
+		            } 
+					catch (InterruptedException e) 
+					{
+		                e.printStackTrace();
+		            }
+				}
 				diceRoll = frame.getResult();
+				frame.setClickedFalse();
+
 				for (int i = 0; i < diceRoll; i++)
 				{
 					if (car[p].getPosition(1) % 2 == 0)
@@ -123,7 +137,7 @@ public class CarGame
 					else
 					{
 						if(car[p].getPosition(0) < maxDim[0])
-							car[p].setPositionX(car[p].getPosition(0) -1);
+							car[p].setPositionX(car[p].getPosition(0) - 1);
 						else
 							car[p].setPositionY(car[p].getPosition(1) + 1);
 					}
@@ -146,6 +160,19 @@ public class CarGame
 					black.doEffect(car[p]);
 					break;
 			}
+		}
+	}
+	
+	public static void findEnd()
+	{
+		if (maxDim[0] % 2 == 0)
+		{
+			end[0] = 0;
+			end[1] = maxDim[1];
+		}
+		else
+		{
+			end = maxDim;
 		}
 	}
 }
