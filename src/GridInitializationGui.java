@@ -91,8 +91,8 @@ public class GridInitializationGui extends JFrame
 	private void okButtonAction() 
 	{
 		
-		dim[0] = Integer.parseInt(xText.getText());
-		dim[1] = Integer.parseInt(yText.getText());
+		dim[1] = Integer.parseInt(xText.getText());
+		dim[0] = Integer.parseInt(yText.getText());
 		perc[0] = Integer.parseInt(grayText.getText());
 		perc[1] = Integer.parseInt(greenText.getText());
 		perc[2] = Integer.parseInt(blackText.getText());

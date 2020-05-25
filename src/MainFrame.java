@@ -1,6 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -28,6 +31,7 @@ public class MainFrame extends JFrame {
 	private ImageIcon bothCars = new ImageIcon("./src/images/bothCars.png");
 	
 	private int[][] carPosition = new int[2][2];
+	private int result;
 	
 	public MainFrame(Grid grid) 
 	{
@@ -109,6 +113,18 @@ public class MainFrame extends JFrame {
 		contentPanel.add(rollPanel, BorderLayout.NORTH);
 		contentPanel.add(boardPanel, BorderLayout.CENTER);
 		contentPanel.add(statsPanel, BorderLayout.SOUTH);
+		
+		rollDie.addActionListener(new ActionListener() 
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				Random rand = new Random();
+				result = rand.nextInt(6) + 1;	
+				updateDieLabel(result);
+			}
+		});
 	}
 	
 	public void updateDieLabel(int roll) {
@@ -121,7 +137,8 @@ public class MainFrame extends JFrame {
 		int rotation = 0;
 		RotatedIcon car, removedCar = null;
 		
-		if(carPosition[(player)][0] == carPosition[(player == 0 ? 1 : 0)][0] && carPosition[(player)][1] == carPosition[(player == 0 ? 1 : 0)][1]) {
+		if(carPosition[(player)][0] == carPosition[(player == 0 ? 1 : 0)][0] && carPosition[(player)][1] == carPosition[(player == 0 ? 1 : 0)][1])
+		{
 			if(player == 0) {
 				if(carPosition[player][0] % 2 != 0) {
 					removedCar = new RotatedIcon(redCar, 180);
@@ -145,15 +162,24 @@ public class MainFrame extends JFrame {
 		carPosition[player][0] = destination[0];
 		carPosition[player][1] = destination[1];
 		
-		if(destination[0] == carPosition[(player == 0 ? 1 : 0)][0] && destination[1] == carPosition[(player == 0 ? 1 : 0)][1]) {
+		if(destination[0] == carPosition[(player == 0 ? 1 : 0)][0] && destination[1] == carPosition[(player == 0 ? 1 : 0)][1]) 
+		{
 			car = new RotatedIcon(bothCars, rotation);
-		}else if(player == 0){
+		}
+		else if(player == 0)
+		{
 			car = new RotatedIcon(blueCar, rotation);
-		}else {
+		}
+		else 
+		{
 			car = new RotatedIcon(redCar, rotation);
 		}
 		
-		
 		cell[destination[1]][destination[0]].setIcon(car);
+	}
+	
+	public int getResult() 
+	{
+		return result;
 	}
 }

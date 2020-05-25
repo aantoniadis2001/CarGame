@@ -73,7 +73,6 @@ public class CarGame
 	{
 		int choice;
 		int cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
-		diceRoll = 0;
 		
 		if(car[p].getFuel() == 0)
 		{
@@ -111,7 +110,7 @@ public class CarGame
 			}
 			else
 			{
-				rollDice();
+				diceRoll = frame.getResult();
 				for (int i = 0; i < diceRoll; i++)
 				{
 					if (car[p].getPosition(1) % 2 == 0)
@@ -148,10 +147,5 @@ public class CarGame
 					break;
 			}
 		}
-	}
-	
-	public static void rollDice()
-	{
-		diceRoll = 1 + (int)(Math.random() * ((6 - 1) + 1));
 	}
 }
