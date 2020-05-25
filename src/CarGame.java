@@ -12,7 +12,7 @@ public class CarGame
 	private static Grid grid;
 	private static NoFuelGui nfg;
 	private static int[] pOutOfFuelTurns = {0,0};
-	private static int[] maxDim;
+	private static int[] maxDim = new int[2];
 	private static int[] end = new int[2];
 	 
 	public static void main(String[] args) 
@@ -45,15 +45,10 @@ public class CarGame
 		nfg = new NoFuelGui();
 		nfg.setVisible(false);
 		
-		maxDim = grid.getDimension();
-		for(int i = 0; i < maxDim[0]; i++)	
-		{
-			for(int j = 0; j < maxDim[1]; j++)
-			{
-				System.out.println(grid.getCell(i, j));
-			}
-			System.out.println(" ");
-		}
+		maxDim[0] = grid.getDimension(1);
+		maxDim[1] = grid.getDimension(0);
+		System.out.println(maxDim[0] + " " + maxDim[1]);
+
 		while((car[0].getPosition() != end) && (car[1].getPosition() != end))
 		{
 			if(turnCounter % 2 == 0)
@@ -154,9 +149,9 @@ public class CarGame
 						e.printStackTrace();
 					}
 				}
-				System.out.println(car[p].getPosition(0) + "  "+"  " + car[p].getPosition(1));
+				System.out.println(car[p].getPosition(0) + "  " + car[p].getPosition(1));
 				
-				cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
+				cellType = grid.getCell(car[p].getPosition(1), car[p].getPosition(0));
 				
 				if(cellType == 0)
 				{
@@ -175,7 +170,7 @@ public class CarGame
 
 				
 				frame.updateCarPosition(p, car[p].getPosition());
-				System.out.println(car[p].getPosition(0) + "  "+"  " + car[p].getPosition(1));
+				System.out.println(car[p].getPosition(0) + "  " + car[p].getPosition(1));
 			}
 		}
 	}

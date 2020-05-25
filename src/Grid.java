@@ -44,8 +44,12 @@ public class Grid
 	{
 		return maxDim;
 	}
-	public int getCell(int x, int y) 
+	public int getDimension(int d)
 	{
-		return grid[x][y];
+		return maxDim[d];
+	}
+	public int getCell(int y, int x) 
+	{
+		return grid[y][x];
 	}
 }
