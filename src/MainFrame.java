@@ -81,7 +81,6 @@ public class MainFrame extends JFrame {
 					cell[i][j] = new JLabel();
 				}
 				//set cell properties
-				System.out.println(i +" " + j);
 				cell[i][j].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 				cell[i][j].setOpaque(true);
 							
@@ -158,7 +157,7 @@ public class MainFrame extends JFrame {
 		
 		cell[carPosition[player][1]][carPosition[player][0]].setIcon(removedCar);
 		
-		if((destination[0] % 2) != 0)
+		if((destination[1] % 2) != 0)
 			rotation = 180;	
 					
 		carPosition[player][0] = destination[0];

@@ -46,9 +46,14 @@ public class CarGame
 		nfg.setVisible(false);
 		
 		maxDim = grid.getDimension();
-		maxDim[0]--;
-		maxDim[1]--;
-																															
+		for(int i = 0; i < maxDim[0]; i++)	
+		{
+			for(int j = 0; j < maxDim[1]; j++)
+			{
+				System.out.println(grid.getCell(i, j));
+			}
+			System.out.println(" ");
+		}
 		while((car[0].getPosition() != end) && (car[1].getPosition() != end))
 		{
 			if(turnCounter % 2 == 0)
@@ -73,7 +78,7 @@ public class CarGame
 	{
 		int diceRoll;
 		int choice;
-		int cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
+		int cellType;
 		
 		if(car[p].getFuel() == 0)
 		{
@@ -103,8 +108,7 @@ public class CarGame
 			frame.updateFuelLabel(p, car[p].getFuel());
 		}
 		else
-		{
-				
+		{	
 			if (pOutOfFuelTurns[p] != 0)
 			{
 				pOutOfFuelTurns[p]--;
@@ -141,24 +145,37 @@ public class CarGame
 						else
 							car[p].setPositionY(car[p].getPosition(1) + 1);
 					}
+					
+					frame.updateCarPosition(p, car[p].getPosition());
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-				frame.updateCarPosition(p, car[p].getPosition());
-			}
-			
-			cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
-			switch (cellType)
-			{
-				case 0:
+				System.out.println(car[p].getPosition(0) + "  "+"  " + car[p].getPosition(1));
+				
+				cellType = grid.getCell(car[p].getPosition(0), car[p].getPosition(1));
+				
+				if(cellType == 0)
+				{
 					grey.doEffect(car[p]);
 					frame.updateFuelLabel(p, car[p].getFuel());
-					break;
-				case 1:
+				}
+				else if(cellType == 1)
+				{
 					green.doEffect(car[p]);
 					frame.updateFuelLabel(p, car[p].getFuel());
-					break;
-				case 2:
+				}
+				else
+				{
 					black.doEffect(car[p]);
-					break;
+				}
+
+				
+				frame.updateCarPosition(p, car[p].getPosition());
+				System.out.println(car[p].getPosition(0) + "  "+"  " + car[p].getPosition(1));
 			}
 		}
 	}

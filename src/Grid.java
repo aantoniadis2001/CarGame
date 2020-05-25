@@ -20,7 +20,7 @@ public class Grid
 		{
 			for(int j = 0; j < maxDim[1]; j++) 
 			{
-				rng = rand.nextInt(101);
+				rng = rand.nextInt(100);
 				if(rng < percentage[0] || (i == 0 && j == 0) || (i == maxDim[0] - 1 && j == maxDim[1] - 1)) 
 				{
 					choice = 0;
