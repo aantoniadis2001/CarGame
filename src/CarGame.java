@@ -47,7 +47,6 @@ public class CarGame
 		
 		maxDim[0] = grid.getDimension(1);
 		maxDim[1] = grid.getDimension(0);
-		System.out.println(maxDim[0] + " " + maxDim[1]);
 
 		while((car[0].getPosition() != end) && (car[1].getPosition() != end))
 		{
@@ -124,7 +123,7 @@ public class CarGame
 				{
 					if (car[p].getPosition(1) % 2 == 0)
 					{
-						if(car[p].getPosition(0) < maxDim[0]-1)
+						if(car[p].getPosition(0) < maxDim[0] - 1)
 							car[p].setPositionX(car[p].getPosition(0) + 1);
 						else
 							car[p].setPositionY(car[p].getPosition(1) + 1);
@@ -145,13 +144,15 @@ public class CarGame
 						e.printStackTrace();
 					}
 				}
-				System.out.println(car[p].getPosition(0) + "  " + car[p].getPosition(1));
 				
 				cellType = grid.getCell(car[p].getPosition(1), car[p].getPosition(0));
 				
 				if(cellType == 0)
 				{
-					grey.doEffect(car[p]);
+					for (int i = 0; i < diceRoll; i++)
+					{
+						grey.doEffect(car[p]);
+					}
 					frame.updateFuelLabel(p, car[p].getFuel());
 				}
 				else if(cellType == 1)
@@ -163,10 +164,8 @@ public class CarGame
 				{
 					black.doEffect(car[p]);
 				}
-
 				
 				frame.updateCarPosition(p, car[p].getPosition());
-				System.out.println(car[p].getPosition(0) + "  " + car[p].getPosition(1));
 			}
 		}
 	}
