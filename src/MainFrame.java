@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
 		 		
 		//set window options
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500, 500);
+		setSize(1400, 1200);
 		
 		//create cells
 		cell = new JLabel[dimensions[0]][dimensions[1]];
