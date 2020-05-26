@@ -26,7 +26,7 @@ public class GridInitializationGui extends JFrame
 	private JTextField grayText;
 	private JTextField greenText;
 	private JTextField blackText;
-	
+	 
 	private JButton okButton;
 	
 	private int[] dim = new int[2];

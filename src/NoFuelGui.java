@@ -53,8 +53,9 @@ public class NoFuelGui extends JFrame
 	}
 	
 	private void okAction() 
-	{	
-		if(rounds < 0 || rounds > 6) 
+	
+	{	rounds = Integer.parseInt(numberText.getText());
+		if(rounds < 0 || rounds > 6 ) 
 		{
 			JOptionPane.showMessageDialog(null, "Invalid parameters, please try again");
 			numberText.setText("");
@@ -62,8 +63,9 @@ public class NoFuelGui extends JFrame
 		else 
 		{
 			setVisible(false);
+			
 		}
-		rounds = Integer.parseInt(numberText.getText());	
+			
 	}
 	
 	public int getRounds() 
