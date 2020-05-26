@@ -21,7 +21,7 @@ public class Grid
 			for(int j = 0; j < maxDim[1]; j++) 
 			{
 				rng = rand.nextInt(100);
-				if(rng < percentage[0] || (i == 0 && j == 0) || ((maxDim[1]) % 2 == 0) && (i == maxDim[0] - 1 && j == 0)) 
+				if(rng < percentage[0] || (i == 0 && j == 0))  
 				{
 					choice = 0;
 				}
