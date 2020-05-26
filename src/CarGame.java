@@ -14,6 +14,7 @@ public class CarGame
 	private static int[] pOutOfFuelTurns = {0,0};
 	private static int[] maxDim = new int[2];
 	private static int[] end = new int[2];
+	private static boolean endGame = false;
 	 
 	public static void main(String[] args) 
 	{	
@@ -52,15 +53,6 @@ public class CarGame
 		{
 			turns(turnCounter % 2);
 			turnCounter++;
-		}
-		
-		if(car[0].getPosition() == end)
-		{
-			JOptionPane.showMessageDialog(null, "Congratulations player 1, YOU WON");
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Congratulations player 2, YOU WON");
 		}
 	}
 	
@@ -121,7 +113,13 @@ public class CarGame
 
 				for (int i = 0; i < diceRoll; i++)
 				{
-					if (car[p].getPosition(1) % 2 == 0)
+					if (car[p].getPosition() == end)
+					{
+						JOptionPane.showMessageDialog(null, "Congratulations player " + p + 1 + " YOU WON");
+						endGame = true;
+						break;
+					}
+					else if (car[p].getPosition(1) % 2 == 0)
 					{
 						if(car[p].getPosition(0) < maxDim[0] - 1)
 							car[p].setPositionX(car[p].getPosition(0) + 1);
@@ -147,39 +145,44 @@ public class CarGame
 				
 				cellType = grid.getCell(car[p].getPosition(1), car[p].getPosition(0));
 				
-				if(cellType == 0)
+				if (!endGame)
 				{
-					for (int i = 0; i < diceRoll; i++)
+					if(cellType == 0)
 					{
-						grey.doEffect(car[p]);
+						for (int i = 0; i < diceRoll; i++)
+						{
+							grey.doEffect(car[p]);
+						}
+						frame.updateFuelLabel(p, car[p].getFuel());
 					}
-					frame.updateFuelLabel(p, car[p].getFuel());
-				}
-				else if(cellType == 1)
-				{
-					green.doEffect(car[p]);
-					frame.updateFuelLabel(p, car[p].getFuel());
-				}
-				else
-				{
-					black.doEffect(car[p]);
+					else if(cellType == 1)
+					{
+						green.doEffect(car[p]);
+						frame.updateFuelLabel(p, car[p].getFuel());
+					}
+					else
+					{
+						black.doEffect(car[p]);
+					}
+					
+					frame.updateCarPosition(p, car[p].getPosition());
 				}
 				
-				frame.updateCarPosition(p, car[p].getPosition());
 			}
 		}
 	}
 	
 	public static void findEnd()
 	{
-		if (maxDim[0] % 2 == 0)
+		if (maxDim[1] % 2 == 0)
 		{
 			end[0] = 0;
-			end[1] = maxDim[1];
+			end[1] = maxDim[1] - 1;
 		}
 		else
 		{
-			end = maxDim;
+			end[0] = maxDim[0] - 1;
+			end[1] = maxDim[1] - 1;
 		}
 	}
 }
