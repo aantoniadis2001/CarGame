@@ -51,11 +51,7 @@ public class CarGame
 
 		while((car[0].getPosition() != end) && (car[1].getPosition() != end))
 		{
-			if(turnCounter % 2 == 0)
-				turns(0);
-			else
-				turns(1);
-			
+			turns(turnCounter % 2);
 			turnCounter++;
 		}
 		
@@ -114,7 +110,7 @@ public class CarGame
 				{
 					try 
 					{
-		                TimeUnit.SECONDS.sleep(1);
+		                TimeUnit.MILLISECONDS.sleep(250);
 		            } 
 					catch (InterruptedException e) 
 					{
@@ -128,22 +124,22 @@ public class CarGame
 				{
 					if (car[p].getPosition(1) % 2 == 0)
 					{
-						if(car[p].getPosition(0) < maxDim[0])
+						if(car[p].getPosition(0) < maxDim[0]-1)
 							car[p].setPositionX(car[p].getPosition(0) + 1);
 						else
 							car[p].setPositionY(car[p].getPosition(1) + 1);
 					}
 					else
 					{
-						if(car[p].getPosition(0) < maxDim[0])
-							car[p].setPositionX(car[p].getPosition(0) - 1);
-						else
+						if(car[p].getPosition(0) == 0)
 							car[p].setPositionY(car[p].getPosition(1) + 1);
+						else
+							car[p].setPositionX(car[p].getPosition(0) - 1);
 					}
 					
 					frame.updateCarPosition(p, car[p].getPosition());
 					try {
-						TimeUnit.SECONDS.sleep(1);
+						TimeUnit.MILLISECONDS.sleep(250);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
