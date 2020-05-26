@@ -13,7 +13,7 @@ public class Grid
 		Random rand = new Random();
 		maxDim = dim;
 		percentage = perc;
-		
+		 
 		grid = new int[maxDim[0]][maxDim[1]];
 		
 		for(int i = 0; i < (maxDim[0]); i++)

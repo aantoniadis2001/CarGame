@@ -55,7 +55,7 @@ public class MainFrame extends JFrame {
 		
 		rollDie = new JButton("Roll Die");
 		die = new JLabel("");
-		 		
+		 		 
 		//set window options
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1400, 1200);
