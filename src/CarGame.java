@@ -120,7 +120,6 @@ public class CarGame
 					if (car[p].getPosition(0) == end[0] && car[p].getPosition(1) == end[1])
 					{
 						JOptionPane.showMessageDialog(null, "Congratulations player " + (p + 1) + " YOU WON");
-						System.out.println("mesa");
 						endGame = true;
 						break;
 					}
@@ -177,14 +176,13 @@ public class CarGame
 		}
 	}
 	
-	public static void findEnd() {
-		System.out.println("max dim " + maxDim[0] + " " + maxDim[1]);
+	public static void findEnd() 
+	{
 		if (maxDim[1] % 2 == 0)
 			end[0] = 0;
 		else 
 			end[0] = maxDim[0] - 1;
 		
 		end[1] = maxDim[1] - 1;
-		System.out.println("end " + end[0] + " " + end[1]);
 	}
 }
