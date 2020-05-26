@@ -49,7 +49,9 @@ public class CarGame
 		maxDim[0] = grid.getDimension(1);
 		maxDim[1] = grid.getDimension(0);
 
-		while((car[0].getPosition() != end) && (car[1].getPosition() != end))
+		findEnd();
+		
+		while(!endGame)
 		{
 			turns(turnCounter % 2);
 			turnCounter++;
@@ -61,6 +63,8 @@ public class CarGame
 		int diceRoll;
 		int choice;
 		int cellType;
+		
+		frame.updateCarPosition(p, car[p].getPosition());
 		
 		if(car[p].getFuel() == 0)
 		{
@@ -113,9 +117,10 @@ public class CarGame
 
 				for (int i = 0; i < diceRoll; i++)
 				{
-					if (car[p].getPosition() == end)
+					if (car[p].getPosition(0) == end[0] && car[p].getPosition(1) == end[1])
 					{
-						JOptionPane.showMessageDialog(null, "Congratulations player " + p + 1 + " YOU WON");
+						JOptionPane.showMessageDialog(null, "Congratulations player " + (p + 1) + " YOU WON");
+						System.out.println("mesa");
 						endGame = true;
 						break;
 					}
@@ -172,17 +177,14 @@ public class CarGame
 		}
 	}
 	
-	public static void findEnd()
-	{
+	public static void findEnd() {
+		System.out.println("max dim " + maxDim[0] + " " + maxDim[1]);
 		if (maxDim[1] % 2 == 0)
-		{
 			end[0] = 0;
-			end[1] = maxDim[1] - 1;
-		}
-		else
-		{
+		else 
 			end[0] = maxDim[0] - 1;
-			end[1] = maxDim[1] - 1;
-		}
+		
+		end[1] = maxDim[1] - 1;
+		System.out.println("end " + end[0] + " " + end[1]);
 	}
 }
